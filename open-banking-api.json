@@ -1,0 +1,2789 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Switch Open Banking API",
+    "version": "0.0.1"
+  },
+  "tags": [
+    {
+      "name": "Account and Transaction API",
+      "description": "Account information and transaction histories"
+    },
+    {
+      "name": "Customer credits",
+      "description": "Credits management"
+    },
+    {
+      "name": "Customer deposits",
+      "description": "Deposits management"
+    },
+    {
+      "name": "Event Notifications",
+      "description": "Notification settings management"
+    },
+    {
+      "name": "Transaction Adjustment",
+      "description": "APIs for requesting and processing transaction adjustments"
+    },
+    {
+      "name": "Mandate Management",
+      "description": "Client permissions management API"
+    },
+    {
+      "name": "Fraud report",
+      "description": "Operations for notifying the SWITCH about fraudulent transactions."
+    },
+    {
+      "name": "Disputes management API",
+      "description": "Endpoints for managing disputes including chargeback, representment, and arbitration processes."
+    }
+  ],
+  "paths": {
+    "/api/v1/accounts/list": {
+      "get": {
+        "summary": "Retrieves detailed account information",
+        "tags": [
+          "Account and Transaction API"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountsResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "summary": "Retrieve Filtered Transaction Information",
+        "tags": [
+          "Account and Transaction API"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "description": "Start date for transaction filtering.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "description": "End date for transaction filtering.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "minAmount",
+            "in": "query",
+            "required": false,
+            "description": "Minimum transaction amount.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "maxAmount",
+            "in": "query",
+            "required": false,
+            "description": "Maximum transaction amount.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Transaction type to filter (DEBIT or CREDIT).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter transactions by status (PENDING, COMPLETED, FAILED).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/accounts": {
+      "post": {
+        "summary": "Retrieves account balance information.",
+        "tags": [
+          "Account and Transaction API"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcccountBalanceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcccountBalanceResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit-rating": {
+      "post": {
+        "summary": "Request to create an operation to obtain a credit rating.",
+        "tags": [
+          "Customer credits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCreditRatingOperationReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCreditRatingOperationRes"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit-rating/{operationId}": {
+      "get": {
+        "summary": "Retrieves the customer's credit rating through the Switch.",
+        "tags": [
+          "Customer credits"
+        ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation Identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditRatingResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit-rating/history": {
+      "get": {
+        "summary": "Retrieves the customer's credit rating requests history",
+        "tags": [
+          "Customer credits"
+        ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "query",
+            "required": true,
+            "description": "Start date for transaction filtering.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "requests"
+                  ],
+                  "properties": {
+                    "requests": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/History"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/enable": {
+      "post": {
+        "summary": "Enables notifications for a client.",
+        "tags": [
+          "Event Notifications"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableNotifRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnableNotifResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/disable": {
+      "post": {
+        "summary": "Disables notifications for a client.",
+        "tags": [
+          "Event Notifications"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisableNotifRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisableNotifResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/settings": {
+      "get": {
+        "summary": "Retrieves the current notification settings for a client.",
+        "tags": [
+          "Event Notifications"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetNotifSettings"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit/offers": {
+      "post": {
+        "summary": "Request to create an operation to obtain a credit offers.",
+        "tags": [
+          "Customer credits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCreditRatingOperationReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCreditRatingOperationRes"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit/offers/{operationId}": {
+      "get": {
+        "summary": "Retrieves installment offers from banks for a customer.",
+        "tags": [
+          "Customer credits"
+        ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation Identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditOffersResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/credit/open": {
+      "post": {
+        "summary": "Initiates a credit payment schedule for the selected installment plan.",
+        "tags": [
+          "Customer credits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditOpenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditOpenResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/deposit/offers": {
+      "post": {
+        "summary": "Request to create an operation to obtain a deposit offers.",
+        "tags": [
+          "Customer deposits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCreditRatingOperationReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCreditRatingOperationRes"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/deposit/offers/{operationId}": {
+      "get": {
+        "summary": "Retrieves deposit account offers for the customer.",
+        "tags": [
+          "Customer deposits"
+        ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation Identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDepositOffersResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/deposit/open": {
+      "post": {
+        "summary": "Initiates the process to open a deposit account.",
+        "tags": [
+          "Customer deposits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepositOpenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositOpenResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          }
+        }
+      }
+    },
+    "/api/v1/adjustment": {
+      "post": {
+        "summary": "Sender initiates a transaction adjustment request",
+        "tags": [
+          "Transaction Adjustment"
+        ],
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Adjustment request successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjustmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Original transaction not found"
+          },
+          "409": {
+            "description": "Adjustment not allowed"
+          },
+          "422": {
+            "description": "Recipient account closed or cannot approve"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/adjustment/{operationId}": {
+      "post": {
+        "summary": "Receiver responds to adjustment request",
+        "tags": [
+          "Transaction Adjustment"
+        ],
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Adjustment request updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjustmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Original transaction not found"
+          },
+          "409": {
+            "description": "Adjustment not allowed"
+          },
+          "422": {
+            "description": "Recipient account closed or cannot approve"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/adjustment/{id}": {
+      "get": {
+        "summary": "Get adjustment request information",
+        "tags": [
+          "Transaction Adjustment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Adjustment information retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjustmentRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Adjustment request not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/permission/issue": {
+      "post": {
+        "tags": [
+          "Mandate Management"
+        ],
+        "summary": "Create new permission",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful permission creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Permission already exists or identifier conflict"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/permission/recall/{permissionId}": {
+      "post": {
+        "tags": [
+          "Mandate Management"
+        ],
+        "summary": "Permission recall",
+        "parameters": [
+          {
+            "name": "permissionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful recall",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Permission not found"
+          }
+        }
+      }
+    },
+    "/api/v1/permissions/client/{clientId}": {
+      "get": {
+        "tags": [
+          "Mandate Management"
+        ],
+        "summary": "Get client permissions",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "permissionId": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "permissionObject": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Client not found"
+          }
+        }
+      }
+    },
+    "/api/v1/permissions/participant/{participantId}": {
+      "get": {
+        "tags": [
+          "Mandate Management"
+        ],
+        "summary": "Get participant permissions",
+        "parameters": [
+          {
+            "name": "participantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permission list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PermissionRequest"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Participant not found"
+          }
+        }
+      }
+    },
+    "/api/v1/permission/request": {
+      "post": {
+        "tags": [
+          "Mandate Management"
+        ],
+        "summary": "Permission request",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/fraud": {
+      "post": {
+        "tags": [
+          "Fraud report"
+        ],
+        "summary": "Set (provide) fraud label",
+        "description": "Notification to SWITCH about a fraudulent operation.",
+        "operationId": "reportFraud",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member identifier"
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member digital signature"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Original operation identifier"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "operationId",
+                  "amount",
+                  "currency",
+                  "recipientId",
+                  "recipientAgentId",
+                  "senderId",
+                  "senderAgentId",
+                  "fraudType",
+                  "comment"
+                ],
+                "properties": {
+                  "operationId": {
+                    "type": "string",
+                    "description": "Switch system operation ID"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Transaction amount"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "description": "Transaction currency"
+                  },
+                  "recipientId": {
+                    "type": "string",
+                    "description": "Recipient code in Switch"
+                  },
+                  "recipientAgentId": {
+                    "type": "string",
+                    "description": "Recipient agent code (BIC ISO9362)"
+                  },
+                  "senderId": {
+                    "type": "string",
+                    "description": "Sender code in Switch"
+                  },
+                  "senderAgentId": {
+                    "type": "string",
+                    "description": "Sender agent code (BIC ISO9362)"
+                  },
+                  "fraudType": {
+                    "type": "string",
+                    "description": "Fraud type, value from the list"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comment"
+                  }
+                }
+              },
+              "example": {
+                "operationId": "61ff8b0f-6b18-4f45-b729-9e4fc70be9f8",
+                "amount": "100000",
+                "currency": "USD",
+                "recipientId": "03dbda3e-0092-401c-af0c-08481238cc76",
+                "recipientAgentId": "0265adc7-8616-4e5f-84ee-38b498c2da70",
+                "senderId": "fc2dc4de-40c5-4a62-a587-c0b62b4c1967",
+                "senderAgentId": "f0fdd456-dabc-42ac-bd12-765aeaee7126",
+                "fraudType": "FRAUD",
+                "comment": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "operationId": "61ff8b0f-6b18-4f45-b729-9e4fc70be9f8",
+                  "status": "OK",
+                  "message": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/chargeback": {
+      "post": {
+        "tags": [
+          "Disputes management API"
+        ],
+        "summary": "Chargeback",
+        "description": "Method to initiate a chargeback dispute.",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member identifier"
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member's signature"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Original operation correlation ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "senderId": "12345",
+                "receiverId": "67890",
+                "dispute": {
+                  "disputeId": "D123456",
+                  "operationId": "O987654",
+                  "creationDate": "2025-03-24T12:30:00Z",
+                  "ttc": "T2025-03-24T12:30:00Z",
+                  "reasonCode": "RC123",
+                  "disputeAmount": 100.5,
+                  "comment": "string"
+                },
+                "transactionData": {
+                  "amount": 100.5,
+                  "currency": "USD",
+                  "settlementDate": "2025-03-23",
+                  "tradingDate": "2025-03-22",
+                  "debtor": {
+                    "debtorType": "Type1",
+                    "debtorClientId": "DC12345",
+                    "debtorAgentID": "DA67890"
+                  },
+                  "creditor": {
+                    "creditorType": "Type2",
+                    "creditorClientId": "CC54321",
+                    "creditorAgentID": "CA09876"
+                  }
+                },
+                "messageType": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chargeback dispute created successfully"
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/representatment": {
+      "post": {
+        "tags": [
+          "Disputes management API"
+        ],
+        "summary": "Representment",
+        "description": "Request to initiate a representment in a dispute case.",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member identifier"
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Member's signature"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Original operation correlation ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "senderId": "12345",
+                "receiverId": "67890",
+                "dispute": {
+                  "disputeId": "D123456",
+                  "operationId": "O987654",
+                  "creationDate": "2025-03-24T12:30:00Z",
+                  "ttc": "2025-03-24T12:30:00Z",
+                  "reasonCode": "RC456",
+                  "disputeAmount": 200.75,
+                  "comment": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Representation submitted successfully"
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/accept": {
+      "post": {
+        "tags": [
+          "Disputes management API"
+        ],
+        "summary": "Accept note",
+        "description": "Confirmation of the legitimacy of a dispute by the responding party.",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dispute accepted successfully"
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/arbitration": {
+      "post": {
+        "tags": [
+          "Disputes management API"
+        ],
+        "summary": "Arbitration request",
+        "description": "Final decision request on dispute by SWITCH.",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Arbitration request submitted"
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Disputes management API"
+        ],
+        "summary": "Arbitration result",
+        "description": "Get arbitration result for a dispute.",
+        "parameters": [
+          {
+            "name": "x-memberId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Arbitration result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "senderId": {
+                      "type": "string"
+                    },
+                    "receiverId": {
+                      "type": "string"
+                    },
+                    "dispute": {
+                      "type": "object",
+                      "properties": {
+                        "disputeId": {
+                          "type": "string"
+                        },
+                        "operationId": {
+                          "type": "string"
+                        },
+                        "correlationId": {
+                          "type": "string"
+                        },
+                        "creationDate": {
+                          "type": "string"
+                        },
+                        "ttc": {
+                          "type": "string"
+                        },
+                        "reasonCode": {
+                          "type": "string"
+                        },
+                        "disputeAmount": {
+                          "type": "number"
+                        },
+                        "comment": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or operation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "switchId": {
+        "name": "switchId",
+        "in": "query",
+        "required": true,
+        "description": "Switch identifier",
+        "schema": {
+          "type": "string",
+          "format": "uuid",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+      },
+      "switchType": {
+        "name": "switchType",
+        "in": "query",
+        "required": true,
+        "description": "Switch account type",
+        "schema": {
+          "type": "string",
+          "format": "uuid",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "example": "PHONE"
+      },
+      "amount": {
+        "name": "amount",
+        "in": "query",
+        "required": true,
+        "description": "The total purchase amount.",
+        "schema": {
+          "type": "number",
+          "format": "uuid"
+        },
+        "example": "1000"
+      },
+      "currency": {
+        "name": "currency",
+        "in": "query",
+        "required": true,
+        "description": "The currency of the purchase (ISO 4217 format).",
+        "schema": {
+          "type": "string",
+          "format": "uuid",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "example": "USD"
+      }
+    },
+    "schemas": {
+      "GetAccountsResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "accounts"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountLite"
+            }
+          }
+        }
+      },
+      "GetTransactionsResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "transactions"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          }
+        }
+      },
+      "GetCreditRatingResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "operationId",
+          "creditRatings",
+          "aggregatedCreditScore"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "operationId": {
+            "type": "string",
+            "example": "479a9b0b-ae2d-4870-96bc-29a18bfd6dbc",
+            "description": "Operation identifier"
+          },
+          "creditRatings": {
+            "$ref": "#/components/schemas/CreditRatings"
+          },
+          "aggregatedCreditScore": {
+            "type": "number",
+            "example": 715,
+            "description": "The average credit score calculated across all banks."
+          }
+        }
+      },
+      "EnableNotifRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "eventTypes",
+          "deliveryChannels"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "eventTypes": {
+            "type": "array",
+            "description": " List of event types for which notifications are being enabled.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TRANSACTION_COMPLETED",
+              "ACCOUNT_BALANCE_UPDATED"
+            ]
+          },
+          "deliveryChannels": {
+            "type": "array",
+            "description": "List of delivery channels for notifications.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "EMAIL",
+              "SMS"
+            ]
+          }
+        }
+      },
+      "EnableNotifResponse": {
+        "type": "object",
+        "required": [
+          "enabledEvents",
+          "enabledChannels"
+        ],
+        "properties": {
+          "enabledEvents": {
+            "type": "array",
+            "description": "List of events for which notifications were enabled.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TRANSACTION_COMPLETED",
+              "ACCOUNT_BALANCE_UPDATED"
+            ]
+          },
+          "enabledChannels": {
+            "type": "array",
+            "description": "List of delivery channels activated.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "EMAIL",
+              "SMS"
+            ]
+          }
+        }
+      },
+      "AcccountBalanceRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "banks"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "banks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "UGBAUGKA"
+            ]
+          }
+        }
+      },
+      "AcccountBalanceResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchIdType",
+          "accounts"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "switchIdType": {
+            "type": "string",
+            "example": "PHONE",
+            "description": "Type of account."
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            }
+          }
+        }
+      },
+      "DisableNotifRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "eventTypes"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "eventTypes": {
+            "type": "array",
+            "description": "List of event types to disable. If omitted, all notifications for the client will be disabled.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TRANSACTION_COMPLETED",
+              "ACCOUNT_BALANCE_UPDATED"
+            ]
+          }
+        }
+      },
+      "DisableNotifResponse": {
+        "type": "object",
+        "required": [
+          "disabledEvents"
+        ],
+        "properties": {
+          "disabledEvents": {
+            "type": "array",
+            "description": " List of events for which notifications were disabled.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TRANSACTION_COMPLETED",
+              "ACCOUNT_BALANCE_UPDATED"
+            ]
+          }
+        }
+      },
+      "GetNotifSettings": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "enabledEvents",
+          "enabledChannels",
+          "lastUpdated"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "enabledEvents": {
+            "type": "string",
+            "description": "List of event types for which notifications are currently enabled."
+          },
+          "enabledChannels": {
+            "type": "string",
+            "description": "List of active delivery channels for notifications."
+          },
+          "lastUpdated": {
+            "type": "string",
+            "description": "ISO 8601 timestamp of the last update to notification settings."
+          }
+        }
+      },
+      "GetCreditOffersResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "offers"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditOffers"
+            }
+          }
+        }
+      },
+      "GetDepositOffersResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "offers"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DepositOffers"
+            }
+          }
+        }
+      },
+      "CreditOffers": {
+        "type": "object",
+        "required": [
+          "bank",
+          "offerId",
+          "installmentCount",
+          "monthlyPayment",
+          "totalCost",
+          "interestRate",
+          "currency",
+          "validUntil"
+        ],
+        "properties": {
+          "bank": {
+            "type": "string",
+            "example": "UGBAUGKA",
+            "description": "Identifier of the bank providing the offer."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "OFFER123",
+            "description": "Unique identifier for the installment offer."
+          },
+          "installmentCount": {
+            "type": "number",
+            "example": 12,
+            "description": "Number of installments in the plan."
+          },
+          "monthlyPayment": {
+            "type": "number",
+            "example": 87.5,
+            "description": "Amount to be paid each month."
+          },
+          "totalCost": {
+            "type": "number",
+            "example": 1050,
+            "description": "Total cost of the installment plan (principal + interest)."
+          },
+          "interestRate": {
+            "type": "number",
+            "example": 5,
+            "description": "Annual interest rate for the installment plan."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "Currency of the offer (ISO 4217 format)."
+          },
+          "validUntil": {
+            "type": "string",
+            "example": "2024-11-30T23:59:59Z",
+            "description": "Expiration date of the offer (ISO 8601 format)."
+          }
+        }
+      },
+      "DepositOffers": {
+        "type": "object",
+        "required": [
+          "bank",
+          "offerId",
+          "interestRate",
+          "term",
+          "minimumAmount",
+          "currency",
+          "validUntil"
+        ],
+        "properties": {
+          "bank": {
+            "type": "string",
+            "example": "UGBAUGKA",
+            "description": "Identifier of the bank providing the offer."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "DEPOSIT001",
+            "description": "Unique identifier for the installment offer."
+          },
+          "interestRate": {
+            "type": "number",
+            "example": 2.5,
+            "description": "Annual interest rate for the deposit account."
+          },
+          "term": {
+            "type": "string",
+            "example": "12 months",
+            "description": "Duration of the deposit account."
+          },
+          "minimumAmount": {
+            "type": "number",
+            "example": 1000,
+            "description": "Minimum deposit amount required."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "Currency of the offer (ISO 4217 format)."
+          },
+          "validUntil": {
+            "type": "string",
+            "example": "2024-11-30T23:59:59Z",
+            "description": "Expiration date of the offer (ISO 8601 format)."
+          }
+        }
+      },
+      "PostCreditRatingOperationReq": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          }
+        }
+      },
+      "PostCreditRatingOperationRes": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "operationId"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "operationId": {
+            "type": "string",
+            "example": "479a9b0b-ae2d-4870-96bc-29a18bfd6dbc",
+            "description": "Operation identifier"
+          }
+        }
+      },
+      "CreditOpenRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "offerId",
+          "customerConsent"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "ooferId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": "The selected deposit offer ID."
+          },
+          "customerConsent": {
+            "type": "boolean",
+            "example": true,
+            "description": "Confirmation that the customer has agreed to the terms."
+          }
+        }
+      },
+      "CreditOpenResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "offerId",
+          "creditPaymentId",
+          "status",
+          "startDate",
+          "nextPaymentDate",
+          "monthlyPayment",
+          "currency"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "ooferId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": " Unique identifier for the installment offer."
+          },
+          "creditPaymentId": {
+            "type": "string",
+            "example": "REC123456",
+            "description": "Unique identifier for the recurring payment schedule."
+          },
+          "status": {
+            "type": "string",
+            "example": "ACTIVE",
+            "description": "Current status of the recurring payment schedule."
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2024-11-20T00:00:00Z",
+            "description": "Date when the recurring payment schedule starts."
+          },
+          "nextPaymentDate": {
+            "type": "string",
+            "example": "nextPaymentDate",
+            "description": "Date of the next scheduled payment."
+          },
+          "monthlyPayment": {
+            "type": "number",
+            "example": 87.5,
+            "description": "Amount to be paid each month."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "Currency of the recurring payment."
+          }
+        }
+      },
+      "DepositOpenRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "offerId",
+          "customerConsent"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "ooferId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": " The selected deposit offer ID."
+          },
+          "customerConsent": {
+            "type": "boolean",
+            "example": true,
+            "description": "Confirmation that the customer has agreed to the terms."
+          }
+        }
+      },
+      "DepositOpenResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "offerId",
+          "depositAccountId",
+          "status",
+          "currency",
+          "interestRate",
+          "term",
+          "startDate"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "ooferId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": "The selected deposit offer ID."
+          },
+          "depositAccountId": {
+            "type": "string",
+            "example": "213351d9-c1fb-4a07-a368-3b515e9dd03a",
+            "description": "Unique identifier for the opened deposit account."
+          },
+          "status": {
+            "type": "string",
+            "example": "OPEN",
+            "description": "Current status of the deposit account."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "Currency of the deposit account."
+          },
+          "interestRate": {
+            "type": "number",
+            "example": 2.5,
+            "description": "Annual interest rate for the deposit account."
+          },
+          "term": {
+            "type": "string",
+            "example": "12 months",
+            "description": "Duration of the deposit account."
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z",
+            "description": "Start date of the deposit account."
+          }
+        }
+      },
+      "Transactions": {
+        "type": "array",
+        "description": "List of transactions.",
+        "items": {
+          "$ref": "#/components/schemas/Transaction"
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "required": [
+          "transactionId",
+          "amount",
+          "currency",
+          "sender",
+          "receiver",
+          "description",
+          "date",
+          "type",
+          "status"
+        ],
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537",
+            "description": "Transaction Id"
+          },
+          "amount": {
+            "type": "number",
+            "example": 500,
+            "description": "Amount."
+          },
+          "currency": {
+            "type": "string",
+            "example": null,
+            "description": "Currency"
+          },
+          "sender": {
+            "type": "string",
+            "example": "GHJSFJSA242",
+            "description": "Sender\u2019s information."
+          },
+          "receiver": {
+            "type": "string",
+            "example": "FJSF@RFSF",
+            "description": "Receiver information."
+          },
+          "description": {
+            "type": "string",
+            "example": "Salary Deposit",
+            "description": "Description or details about the transaction."
+          },
+          "date": {
+            "type": "string",
+            "example": "2024-11-15T10:00:00Z",
+            "description": "ISO 8601 timestamp of the transaction."
+          },
+          "type": {
+            "type": "string",
+            "example": "TRANSFER",
+            "description": "Type of transaction."
+          },
+          "status": {
+            "type": "string",
+            "example": "COMPLETED",
+            "description": "Transaction status."
+          }
+        }
+      },
+      "CreditRatings": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CreditRating"
+        }
+      },
+      "CreditRating": {
+        "type": "object",
+        "required": [
+          "bank",
+          "creditScore",
+          "lastUpdated"
+        ],
+        "properties": {
+          "bank": {
+            "type": "string",
+            "example": "EQBLUGKA",
+            "description": "Identifier of the bank."
+          },
+          "creditScore": {
+            "type": "integer",
+            "example": "680",
+            "description": "The numerical credit score provided by the bank."
+          },
+          "lastUpdated": {
+            "type": "string",
+            "example": "2024-11-15T14:30:00Z",
+            "description": "ISO 8601 timestamp of when the credit rating was last updated."
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "required": [
+          "bank",
+          "accountId",
+          "balance",
+          "currency"
+        ],
+        "properties": {
+          "bank": {
+            "type": "string",
+            "example": "UGBAUGKA",
+            "description": "Bank identifier."
+          },
+          "accountId": {
+            "type": "string",
+            "example": "b029ab10-1baf-4d79-ad8e-a96c3752901c",
+            "description": "The unique ID of the account."
+          },
+          "balance": {
+            "type": "number",
+            "example": 1000,
+            "description": "Available balance for transactions."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "Currency in ISO 4217 format."
+          }
+        }
+      },
+      "AccountLite": {
+        "type": "object",
+        "required": [
+          "bank",
+          "accountId"
+        ],
+        "properties": {
+          "bank": {
+            "type": "string",
+            "example": "UGBAUGKA",
+            "description": "Bank identifier."
+          },
+          "accountId": {
+            "type": "string",
+            "example": "b029ab10-1baf-4d79-ad8e-a96c3752901c",
+            "description": "The unique ID of the account."
+          }
+        }
+      },
+      "History": {
+        "type": "object",
+        "required": [
+          "operationId",
+          "switchId",
+          "switchType",
+          "requestTime",
+          "status"
+        ],
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "example": "6efbc215-4444-4aef-9b23-3dff55264078",
+            "description": "Operation identifier."
+          },
+          "switchId": {
+            "type": "string",
+            "example": "b029ab10-1baf-4d79-ad8e-a96c3752901c",
+            "description": "Switch identifier."
+          },
+          "switchType": {
+            "type": "string",
+            "example": "PHONE",
+            "description": "Switch ID Type"
+          },
+          "requestTime": {
+            "type": "string",
+            "example": "2024-11-15T14:30:00Z",
+            "description": "ISO 8601 timestamp"
+          },
+          "status": {
+            "type": "string",
+            "example": "READY",
+            "description": "Operation status"
+          }
+        }
+      },
+      "PermissionRequest": {
+        "type": "object",
+        "required": [
+          "permissionId",
+          "timestamp",
+          "issuer",
+          "acquirer",
+          "permission"
+        ],
+        "properties": {
+          "permissionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Permission ID"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Permission creation time"
+          },
+          "permissionExpirationTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "The date and time the permit expires. If NULL, the permit is permanent.."
+          },
+          "issuer": {
+            "$ref": "#/components/schemas/ParticipantInfo"
+          },
+          "acquirer": {
+            "$ref": "#/components/schemas/ParticipantInfo"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/PermissionInfo"
+          }
+        }
+      },
+      "ParticipantInfo": {
+        "type": "object",
+        "required": [
+          "participantId"
+        ],
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Participant identifier"
+          },
+          "clientId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Client identifier"
+          }
+        }
+      },
+      "PermissionInfo": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "VIEW_BALANCE",
+              "PAY_WITHOUT_AUTH",
+              "TOP_UP"
+            ],
+            "description": "Permission type"
+          },
+          "permissionObject": {
+            "type": "string",
+            "enum": [
+              "accounts",
+              "client_data",
+              "alias",
+              "\u0441\u0447\u0435\u0442\u0447\u0438\u043a\u0438"
+            ],
+            "nullable": true,
+            "description": "Permission object"
+          }
+        }
+      },
+      "AdjustmentRequest": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "requested",
+              "in progress",
+              "rejected",
+              "approved"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "recipientId": {
+            "type": "string"
+          },
+          "recipientAgentId": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "comment"
+        ]
+      },
+      "AdjustmentResponse": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "operationId",
+          "status",
+          "message"
+        ]
+      }
+    }
+  }
+}

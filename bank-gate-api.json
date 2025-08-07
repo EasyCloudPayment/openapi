@@ -1,0 +1,2504 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Public API - Payment Link Registry",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/payment-link/payment-link-entity": {
+      "put": {
+        "tags": [
+          "Payment Link entity operations"
+        ],
+        "operationId": "updatePaymentLinkEntity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentLinkEntity"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link": {
+      "post": {
+        "tags": [
+          "Payment Link"
+        ],
+        "operationId": "createPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentLinkCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link/payment-link-entity/new": {
+      "post": {
+        "tags": [
+          "Payment Link entity operations"
+        ],
+        "operationId": "createPaymentLinkEntity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentLinkEntity"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link-rtp": {
+      "get": {
+        "tags": [
+          "(Request to Pay) Payment Link"
+        ],
+        "operationId": "getRequestToPayPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "switchIdType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "switchIdNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "(Request to Pay) Payment Link"
+        ],
+        "operationId": "createRequestToPayPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientAwarePaymentLinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientAwarePaymentLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link-bp": {
+      "get": {
+        "tags": [
+          "(Bill Payment) Payment Link"
+        ],
+        "operationId": "getBillPaymentsPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "switchIdType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "switchIdNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "(Bill Payment) Payment Link"
+        ],
+        "operationId": "createBillPaymentsPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientAwarePaymentLinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientAwarePaymentLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant": {
+      "post": {
+        "tags": [
+          "Merchant"
+        ],
+        "operationId": "createMerchant",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MerchantCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/{merchantId}/payment-links/search": {
+      "post": {
+        "tags": [
+          "Merchant"
+        ],
+        "operationId": "getPaymentLinksBy",
+        "parameters": [
+          {
+            "name": "merchantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestString"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedPaymentLinkListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/search": {
+      "post": {
+        "tags": [
+          "Merchant"
+        ],
+        "operationId": "getMerchants",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestString"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legal-entity": {
+      "post": {
+        "tags": [
+          "Legal entity"
+        ],
+        "operationId": "createLegalEntity",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LegalEntityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegalEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legal-entity-account": {
+      "post": {
+        "tags": [
+          "Legal Entity Account"
+        ],
+        "operationId": "createLegalEntity_1",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LegalEntityAccountCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegalEntityAccountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link/{id}": {
+      "get": {
+        "tags": [
+          "Payment Link"
+        ],
+        "operationId": "getPaymentLink",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link/payment-link-entity/{id}": {
+      "get": {
+        "tags": [
+          "Payment Link entity operations"
+        ],
+        "operationId": "getPaymentLinkEntity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Payment Link entity operations"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentLinkEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-link/payment-link-entity/all": {
+      "get": {
+        "tags": [
+          "Payment Link entity operations"
+        ],
+        "operationId": "getPaymentLinkEntities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentLinkEntity"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/{id}": {
+      "get": {
+        "tags": [
+          "Merchant"
+        ],
+        "operationId": "getMerchant",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legal-entity/{legalEntityId}": {
+      "get": {
+        "tags": [
+          "Legal entity"
+        ],
+        "operationId": "getLegalEntity",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "legalEntityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegalEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legal-entity-account/{id}": {
+      "get": {
+        "tags": [
+          "Legal Entity Account"
+        ],
+        "operationId": "getLegalEntityAccount",
+        "parameters": [
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegalEntityAccountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCategory": {
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number"
+          }
+        }
+      },
+      "PaymentLinkEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "legalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "QR",
+              "BILL_PAYMENT",
+              "REQUEST_TO_PAY"
+            ]
+          },
+          "switchIdType": {
+            "type": "string"
+          },
+          "switchIdNumber": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          },
+          "ttl": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentPurpose": {
+            "type": "string"
+          },
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          }
+        }
+      },
+      "CartItemDto": {
+        "required": [
+          "amount",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCategory": {
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number"
+          }
+        }
+      },
+      "PaymentLinkCreateRequest": {
+        "required": [
+          "accountId",
+          "amount",
+          "currency",
+          "merchantId",
+          "paymentPurpose",
+          "ttl"
+        ],
+        "type": "object",
+        "properties": {
+          "merchantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ttl": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentPurpose": {
+            "type": "string"
+          },
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            }
+          }
+        }
+      },
+      "PaymentLinkDto": {
+        "required": [
+          "account",
+          "accountId",
+          "id",
+          "legalId",
+          "mcc",
+          "memberId",
+          "merchantId",
+          "merchantName",
+          "tin",
+          "ttl"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "account": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "legalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          },
+          "ttl": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentPurpose": {
+            "type": "string"
+          },
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            }
+          }
+        }
+      },
+      "PaymentLinkResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PaymentLinkDto"
+          }
+        }
+      },
+      "Result": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "PL0000",
+              "PL0001",
+              "PL0002",
+              "PL0003",
+              "PL0004",
+              "PL0005",
+              "PL0006",
+              "PL0020",
+              "PL9999"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ClientAwarePaymentLinkRequest": {
+        "required": [
+          "accountId",
+          "amount",
+          "currency",
+          "merchantId",
+          "paymentPurpose",
+          "switchIdNumber",
+          "switchIdType",
+          "ttl"
+        ],
+        "type": "object",
+        "properties": {
+          "switchIdType": {
+            "type": "string"
+          },
+          "switchIdNumber": {
+            "type": "string"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ttl": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentPurpose": {
+            "type": "string"
+          },
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            }
+          }
+        }
+      },
+      "ClientAwarePaymentLinkDto": {
+        "required": [
+          "accountId",
+          "id",
+          "legalId",
+          "mcc",
+          "memberId",
+          "merchantId",
+          "merchantName",
+          "switchIdNumber",
+          "switchIdType",
+          "tin",
+          "ttl"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "switchIdType": {
+            "type": "string"
+          },
+          "switchIdNumber": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "legalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          },
+          "ttl": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "paymentPurpose": {
+            "type": "string"
+          },
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            }
+          }
+        }
+      },
+      "ClientAwarePaymentLinkResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClientAwarePaymentLinkDto"
+          }
+        }
+      },
+      "MerchantCreateRequest": {
+        "required": [
+          "accountId",
+          "address",
+          "mcc",
+          "merchantName"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "address": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          }
+        }
+      },
+      "MerchantDto": {
+        "required": [
+          "accountId",
+          "address",
+          "createdBy",
+          "id",
+          "mcc",
+          "memberId",
+          "merchantName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "account": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          }
+        }
+      },
+      "MerchantResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MerchantDto"
+          }
+        }
+      },
+      "PageRequestString": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string"
+          },
+          "pageNumber": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "withDeleted": {
+            "type": "boolean"
+          },
+          "orderBy": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
+            }
+          }
+        }
+      },
+      "PageResponseClientAwarePaymentLinkDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientAwarePaymentLinkDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PagedPaymentLinkListResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseClientAwarePaymentLinkDto"
+          }
+        }
+      },
+      "MerchantListResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseMerchantDto"
+          }
+        }
+      },
+      "PageResponseMerchantDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MerchantDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "LegalEntityCreateRequest": {
+        "required": [
+          "tin"
+        ],
+        "type": "object",
+        "properties": {
+          "tin": {
+            "type": "string"
+          }
+        }
+      },
+      "LegalEntityDto": {
+        "required": [
+          "id",
+          "status",
+          "tin"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE"
+            ]
+          }
+        }
+      },
+      "LegalEntityResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LegalEntityDto"
+          }
+        }
+      },
+      "LegalEntityAccountCreateRequest": {
+        "required": [
+          "account",
+          "legalId",
+          "memberId"
+        ],
+        "type": "object",
+        "properties": {
+          "legalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "memberId": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          }
+        }
+      },
+      "LegalEntityAccountDto": {
+        "required": [
+          "account",
+          "id",
+          "legalId",
+          "memberId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "legalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "account": {
+            "type": "string"
+          },
+          "memberId": {
+            "type": "string"
+          }
+        }
+      },
+      "LegalEntityAccountResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LegalEntityAccountDto"
+          }
+        }
+      },
+      "PaymentLinkListResponse": {
+        "required": [
+          "data",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientAwarePaymentLinkDto"
+            }
+          }
+        }
+      }
+    }
+  }
+}
