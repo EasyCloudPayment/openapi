@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
     "title": "Public API - Bank Gate",
     "version": "v1"
@@ -176,7 +176,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -311,8 +313,10 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true,
-                "style": "simple"
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -432,8 +436,10 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true,
-                "style": "simple"
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -655,7 +661,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -895,7 +903,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1135,7 +1145,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1375,7 +1387,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1589,7 +1603,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1821,7 +1837,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2070,7 +2088,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2319,7 +2339,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2568,7 +2590,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2817,7 +2841,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3066,7 +3092,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3297,7 +3325,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3535,7 +3565,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3775,7 +3807,9 @@
             "headers": {
               "X-Operation-Id": {
                 "description": "Operation id assigned by Switch",
-                "required": true
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
