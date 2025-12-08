@@ -4018,11 +4018,15 @@
       },
       "Agent": {
         "required": [
-          "agentId"
+          "agentId",
+          "location"
         ],
         "type": "object",
         "properties": {
           "agentId": {
+            "type": "string"
+          },
+          "location": {
             "type": "string"
           }
         }
@@ -4551,7 +4555,8 @@
       },
       "LiveDataAgent": {
         "required": [
-          "agentId"
+          "agentId",
+          "location"
         ],
         "type": "object",
         "properties": {
@@ -4559,6 +4564,9 @@
             "type": "string"
           },
           "agentId": {
+            "type": "string"
+          },
+          "location": {
             "type": "string"
           }
         }
@@ -4956,11 +4964,15 @@
       },
       "AgentDto": {
         "required": [
-          "agentId"
+          "agentId",
+          "location"
         ],
         "type": "object",
         "properties": {
           "agentId": {
+            "type": "string"
+          },
+          "location": {
             "type": "string"
           }
         }
