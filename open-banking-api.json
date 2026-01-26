@@ -39,46 +39,6 @@
     }
   ],
   "paths": {
-    "/api/v1/accounts/list": {
-      "get": {
-        "summary": "Retrieves detailed account information",
-        "tags": [
-          "Account and Transaction API"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/switchId"
-          },
-          {
-            "$ref": "#/components/parameters/switchType"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAccountsResponse"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "NOT FOUND"
-          },
-          "400": {
-            "description": "BAD REQUEST"
-          },
-          "401": {
-            "description": "UNAUTHORIZED"
-          },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          }
-        }
-      }
-    },
     "/api/v1/transactions": {
       "get": {
         "summary": "Retrieve Filtered Transaction Information",
@@ -98,7 +58,8 @@
             "required": false,
             "description": "Start date for transaction filtering.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date"
             }
           },
           {
@@ -107,7 +68,8 @@
             "required": false,
             "description": "End date for transaction filtering.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date"
             }
           },
           {
@@ -134,7 +96,11 @@
             "required": false,
             "description": "Transaction type to filter (DEBIT or CREDIT).",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "DEBIT",
+                "CREDIT"
+              ]
             }
           },
           {
@@ -143,7 +109,12 @@
             "required": false,
             "description": "Filter transactions by status (PENDING, COMPLETED, FAILED).",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "COMPLETED",
+                "FAILED"
+              ]
             }
           }
         ],
@@ -158,9 +129,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -169,8 +137,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/accounts": {
@@ -184,7 +160,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AcccountBalanceRequest"
+                "$ref": "#/components/schemas/AccountBalanceRequest"
               }
             }
           }
@@ -195,13 +171,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AcccountBalanceResponse"
+                  "$ref": "#/components/schemas/AccountBalanceResponse"
                 }
               }
             }
-          },
-          "204": {
-            "description": "NOT FOUND"
           },
           "400": {
             "description": "BAD REQUEST"
@@ -211,8 +184,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit-rating": {
@@ -242,9 +223,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -253,8 +231,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit-rating/{operationId}": {
@@ -285,9 +271,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -296,8 +279,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit-rating/history": {
@@ -338,9 +329,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -349,8 +337,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/notifications/enable": {
@@ -380,9 +376,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -391,8 +384,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/notifications/disable": {
@@ -422,9 +423,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -433,8 +431,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/notifications/settings": {
@@ -462,9 +468,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -473,8 +476,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit/offers": {
@@ -504,9 +515,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -515,8 +523,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit/offers/{operationId}": {
@@ -547,9 +563,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -558,8 +571,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/credit/open": {
@@ -589,9 +610,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -600,8 +618,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/deposit/offers": {
@@ -631,9 +657,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -642,8 +665,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/deposit/offers/{operationId}": {
@@ -674,9 +705,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -685,8 +713,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/deposit/open": {
@@ -716,9 +752,6 @@
               }
             }
           },
-          "204": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "BAD REQUEST"
           },
@@ -727,8 +760,16 @@
           },
           "500": {
             "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/adjustment": {
@@ -795,6 +836,9 @@
           },
           "500": {
             "description": "Internal server error"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -871,6 +915,9 @@
           },
           "500": {
             "description": "Internal server error"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -931,6 +978,9 @@
           },
           "500": {
             "description": "Internal server error"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -978,6 +1028,9 @@
           },
           "500": {
             "description": "Internal server error"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1018,8 +1071,11 @@
               }
             }
           },
-          "204": {
-            "description": "Permission not found"
+          "404": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1071,8 +1127,11 @@
               }
             }
           },
-          "204": {
-            "description": "Client not found"
+          "404": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1108,8 +1167,11 @@
               }
             }
           },
-          "204": {
-            "description": "Participant not found"
+          "404": {
+            "description": "NOT FOUND"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1627,6 +1689,51 @@
           }
         }
       }
+    },
+    "/api/v1/accounts-list": {
+      "get": {
+        "summary": "Retrieves detailed account information",
+        "tags": [
+          "Account and Transaction API"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          },
+          "401": {
+            "description": "UNAUTHORIZED"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1865,78 +1972,6 @@
               "EMAIL",
               "SMS"
             ]
-          }
-        }
-      },
-      "AcccountBalanceRequest": {
-        "type": "object",
-        "required": [
-          "switchId",
-          "switchType",
-          "banks"
-        ],
-        "properties": {
-          "switchId": {
-            "description": "Switch identifier",
-            "type": "string",
-            "format": "uuid",
-            "minLength": 36,
-            "maxLength": 36,
-            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
-          },
-          "switchType": {
-            "description": "Switch account type",
-            "type": "string",
-            "format": "uuid",
-            "minLength": 36,
-            "maxLength": 36,
-            "example": "PHONE"
-          },
-          "banks": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "UGBAUGKA"
-            ]
-          }
-        }
-      },
-      "AcccountBalanceResponse": {
-        "type": "object",
-        "required": [
-          "switchId",
-          "switchIdType",
-          "accounts"
-        ],
-        "properties": {
-          "switchId": {
-            "description": "Switch identifier",
-            "type": "string",
-            "format": "uuid",
-            "minLength": 36,
-            "maxLength": 36,
-            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
-          },
-          "switchType": {
-            "description": "Switch account type",
-            "type": "string",
-            "format": "uuid",
-            "minLength": 36,
-            "maxLength": 36,
-            "example": "PHONE"
-          },
-          "switchIdType": {
-            "type": "string",
-            "example": "PHONE",
-            "description": "Type of account."
-          },
-          "accounts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Account"
-            }
           }
         }
       },
@@ -2499,7 +2534,7 @@
           "sender": {
             "type": "string",
             "example": "GHJSFJSA242",
-            "description": "Sender\u2019s information."
+            "description": "Sender’s information."
           },
           "receiver": {
             "type": "string",
@@ -2723,7 +2758,7 @@
               "accounts",
               "client_data",
               "alias",
-              "\u0441\u0447\u0435\u0442\u0447\u0438\u043a\u0438"
+              "счетчики"
             ],
             "nullable": true,
             "description": "Permission object"
@@ -2783,7 +2818,91 @@
           "status",
           "message"
         ]
+      },
+      "AccountBalanceRequest": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchType",
+          "banks"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "banks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "UGBAUGKA"
+            ]
+          }
+        }
+      },
+      "AccountBalanceResponse": {
+        "type": "object",
+        "required": [
+          "switchId",
+          "switchIdType",
+          "accounts"
+        ],
+        "properties": {
+          "switchId": {
+            "description": "Switch identifier",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+          },
+          "switchType": {
+            "description": "Switch account type",
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "example": "PHONE"
+          },
+          "switchIdType": {
+            "type": "string",
+            "example": "PHONE",
+            "description": "Type of account."
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
       }
     }
-  }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
 }
