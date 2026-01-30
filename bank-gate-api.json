@@ -254,7 +254,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/identity-verification": {
@@ -490,7 +495,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/identity-verification-result": {
@@ -742,7 +752,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/default-bank": {
@@ -985,7 +1000,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/default-bank/initialize": {
@@ -1228,7 +1248,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/default-bank/confirmation": {
@@ -1471,7 +1496,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/iso20022": {
@@ -1688,7 +1718,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/iso8583/auth": {
@@ -1785,6 +1820,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -2021,7 +2059,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/c2b/payment": {
@@ -2273,7 +2316,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/c2b/confirmation-result": {
@@ -2525,7 +2573,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/ExtTransaction": {
@@ -2777,7 +2830,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/ExtTransactionBatch": {
@@ -3029,7 +3087,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/ExtEODReport": {
@@ -3281,7 +3344,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/participants": {
@@ -3515,7 +3583,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/p2p/operations/{operationId}": {
@@ -3756,7 +3829,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/api/v1/c2b/operations/{operationId}": {
@@ -3999,7 +4077,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     }
   },
@@ -5674,6 +5757,18 @@
           }
         }
       }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Signature"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
 }
