@@ -39,7 +39,7 @@
     }
   ],
   "paths": {
-    "/api/v1/transactions": {
+    "/api/v1/accounts/transactions": {
       "get": {
         "summary": "Retrieve Filtered Transaction Information",
         "tags": [
@@ -135,18 +135,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_accounts_transactions"
       }
     },
     "/api/v1/accounts": {
@@ -182,18 +183,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_accounts"
       }
     },
     "/api/v1/credit-rating": {
@@ -229,18 +231,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_credit-rating"
       }
     },
     "/api/v1/credit-rating/{operationId}": {
@@ -277,18 +280,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_credit-rating_operationId"
       }
     },
     "/api/v1/credit-rating/history": {
@@ -335,18 +339,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_credit-rating_history"
       }
     },
     "/api/v1/notifications/enable": {
@@ -382,18 +387,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_notifications_enable"
       }
     },
     "/api/v1/notifications/disable": {
@@ -429,18 +435,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_notifications_disable"
       }
     },
     "/api/v1/notifications/settings": {
@@ -474,18 +481,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_notifications_settings"
       }
     },
     "/api/v1/credit/offers": {
@@ -521,18 +529,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_credit_offers"
       }
     },
     "/api/v1/credit/offers/{operationId}": {
@@ -569,18 +578,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_credit_offers_operationId"
       }
     },
     "/api/v1/credit/open": {
@@ -616,18 +626,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_credit_open"
       }
     },
     "/api/v1/deposit/offers": {
@@ -663,18 +674,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_deposit_offers"
       }
     },
     "/api/v1/deposit/offers/{operationId}": {
@@ -711,18 +723,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_deposit_offers_operationId"
       }
     },
     "/api/v1/deposit/open": {
@@ -758,18 +771,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "post_api_v1_deposit_open"
       }
     },
     "/api/v1/adjustment": {
@@ -780,28 +794,13 @@
         ],
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "requestBody": {
@@ -825,6 +824,9 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
             "description": "Original transaction not found"
           },
@@ -836,11 +838,9 @@
           },
           "500": {
             "description": "Internal server error"
-          },
-          "400": {
-            "description": "Bad Request"
           }
-        }
+        },
+        "operationId": "post_api_v1_adjustment"
       }
     },
     "/api/v1/adjustment/{operationId}": {
@@ -851,28 +851,13 @@
         ],
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           },
           {
             "name": "operationId",
@@ -904,6 +889,9 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
             "description": "Original transaction not found"
           },
@@ -915,11 +903,9 @@
           },
           "500": {
             "description": "Internal server error"
-          },
-          "400": {
-            "description": "Bad Request"
           }
-        }
+        },
+        "operationId": "post_api_v1_adjustment_operationId"
       }
     },
     "/api/v1/adjustment/{id}": {
@@ -938,28 +924,13 @@
             }
           },
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "responses": {
@@ -973,16 +944,17 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
             "description": "Adjustment request not found"
           },
           "500": {
             "description": "Internal server error"
-          },
-          "400": {
-            "description": "Bad Request"
           }
-        }
+        },
+        "operationId": "get_api_v1_adjustment_id"
       }
     },
     "/api/v1/permission/issue": {
@@ -1020,6 +992,9 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "409": {
             "description": "Permission already exists or identifier conflict"
           },
@@ -1028,11 +1003,9 @@
           },
           "500": {
             "description": "Internal server error"
-          },
-          "400": {
-            "description": "Bad Request"
           }
-        }
+        },
+        "operationId": "post_api_v1_permission_issue"
       }
     },
     "/api/v1/permission/recall/{permissionId}": {
@@ -1071,13 +1044,14 @@
               }
             }
           },
-          "404": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "operationId": "post_api_v1_permission_recall_permissionId"
       }
     },
     "/api/v1/permissions/client/{clientId}": {
@@ -1127,13 +1101,14 @@
               }
             }
           },
-          "404": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "operationId": "get_api_v1_permissions_client_clientId"
       }
     },
     "/api/v1/permissions/participant/{participantId}": {
@@ -1167,13 +1142,14 @@
               }
             }
           },
-          "404": {
-            "description": "NOT FOUND"
-          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
-        }
+        },
+        "operationId": "get_api_v1_permissions_participant_participantId"
       }
     },
     "/api/v1/permission/request": {
@@ -1217,7 +1193,8 @@
           "403": {
             "description": "Forbidden"
           }
-        }
+        },
+        "operationId": "post_api_v1_permission_request"
       }
     },
     "/api/v1/fraud": {
@@ -1230,31 +1207,13 @@
         "operationId": "reportFraud",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member identifier"
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member digital signature"
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Original operation identifier"
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "requestBody": {
@@ -1358,31 +1317,13 @@
         "description": "Method to initiate a chargeback dispute.",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member identifier"
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member's signature"
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Original operation correlation ID"
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "requestBody": {
@@ -1435,7 +1376,8 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "post_api_v1_chargeback"
       }
     },
     "/api/v1/representatment": {
@@ -1447,31 +1389,13 @@
         "description": "Request to initiate a representment in a dispute case.",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member identifier"
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Member's signature"
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Original operation correlation ID"
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "requestBody": {
@@ -1507,7 +1431,8 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "post_api_v1_representatment"
       }
     },
     "/api/v1/accept": {
@@ -1519,28 +1444,13 @@
         "description": "Confirmation of the legitimacy of a dispute by the responding party.",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "responses": {
@@ -1553,7 +1463,8 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "post_api_v1_accept"
       }
     },
     "/api/v1/arbitration": {
@@ -1565,28 +1476,13 @@
         "description": "Final decision request on dispute by SWITCH.",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "responses": {
@@ -1599,7 +1495,8 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "post_api_v1_arbitration"
       },
       "get": {
         "tags": [
@@ -1609,28 +1506,13 @@
         "description": "Get arbitration result for a dispute.",
         "parameters": [
           {
-            "name": "x-memberId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-memberId"
           },
           {
-            "name": "x-signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/x-signature"
           },
           {
-            "name": "correlationId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/correlationId"
           }
         ],
         "responses": {
@@ -1687,10 +1569,11 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "get_api_v1_arbitration"
       }
     },
-    "/api/v1/accounts-list": {
+    "/api/v1/accounts/list": {
       "get": {
         "summary": "Retrieves detailed account information",
         "tags": [
@@ -1721,18 +1604,19 @@
           "401": {
             "description": "UNAUTHORIZED"
           },
-          "500": {
-            "description": "INTERNAL SERVER ERROR"
-          },
           "404": {
             "description": "NOT FOUND"
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR"
           }
         },
         "security": [
           {
             "ApiKeyAuth": []
           }
-        ]
+        ],
+        "operationId": "get_api_v1_accounts_list"
       }
     }
   },
@@ -1787,6 +1671,33 @@
           "maxLength": 36
         },
         "example": "USD"
+      },
+      "x-memberId": {
+        "name": "x-memberId",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Member identifier"
+      },
+      "x-signature": {
+        "name": "x-signature",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Member digital signature"
+      },
+      "correlationId": {
+        "name": "correlationId",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Operation correlation identifier"
       }
     },
     "schemas": {
@@ -1809,7 +1720,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -1841,7 +1751,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -1875,7 +1784,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -1915,7 +1823,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -1993,7 +1900,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2051,7 +1957,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2089,7 +1994,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2121,7 +2025,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2256,7 +2159,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2282,7 +2184,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2314,20 +2215,19 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
-          },
-          "ooferId": {
-            "type": "string",
-            "example": "246c49fa-3147-455d-9644-77904374f308",
-            "description": "The selected deposit offer ID."
           },
           "customerConsent": {
             "type": "boolean",
             "example": true,
             "description": "Confirmation that the customer has agreed to the terms."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": "The selected deposit offer ID."
           }
         }
       },
@@ -2351,11 +2251,6 @@
             "minLength": 36,
             "maxLength": 36,
             "example": "77a1880d-b359-4d1f-809d-9d2066044537"
-          },
-          "ooferId": {
-            "type": "string",
-            "example": "246c49fa-3147-455d-9644-77904374f308",
-            "description": " Unique identifier for the installment offer."
           },
           "creditPaymentId": {
             "type": "string",
@@ -2386,6 +2281,11 @@
             "type": "string",
             "example": "USD",
             "description": "Currency of the recurring payment."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": " Unique identifier for the installment offer."
           }
         }
       },
@@ -2409,20 +2309,19 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
-          },
-          "ooferId": {
-            "type": "string",
-            "example": "246c49fa-3147-455d-9644-77904374f308",
-            "description": " The selected deposit offer ID."
           },
           "customerConsent": {
             "type": "boolean",
             "example": true,
             "description": "Confirmation that the customer has agreed to the terms."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": " The selected deposit offer ID."
           }
         }
       },
@@ -2451,15 +2350,9 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
-          },
-          "ooferId": {
-            "type": "string",
-            "example": "246c49fa-3147-455d-9644-77904374f308",
-            "description": "The selected deposit offer ID."
           },
           "depositAccountId": {
             "type": "string",
@@ -2490,6 +2383,11 @@
             "type": "string",
             "example": "2024-01-01T00:00:00Z",
             "description": "Start date of the deposit account."
+          },
+          "offerId": {
+            "type": "string",
+            "example": "246c49fa-3147-455d-9644-77904374f308",
+            "description": "The selected deposit offer ID."
           }
         }
       },
@@ -2838,7 +2736,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
@@ -2873,7 +2770,6 @@
           "switchType": {
             "description": "Switch account type",
             "type": "string",
-            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "example": "PHONE"
