@@ -116,12 +116,6 @@
                 "FAILED"
               ]
             }
-          },
-          {
-            "$ref": "#/components/parameters/switchId"
-          },
-          {
-            "$ref": "#/components/parameters/switchType"
           }
         ],
         "responses": {
@@ -1596,12 +1590,6 @@
           "Account and Transaction API"
         ],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/switchId"
-          },
-          {
-            "$ref": "#/components/parameters/switchType"
-          },
           {
             "$ref": "#/components/parameters/switchId"
           },

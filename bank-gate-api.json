@@ -2581,7 +2581,7 @@
         ]
       }
     },
-    "/api/v1/ExtTransaction": {
+    "/api/v1/c2b/ExtTransaction": {
       "post": {
         "tags": [
           "Live-data storage controller"
@@ -2838,7 +2838,7 @@
         ]
       }
     },
-    "/api/v1/ExtTransactionBatch": {
+    "/api/v1/c2b/ExtTransactionBatch": {
       "post": {
         "tags": [
           "Live-data storage controller"
@@ -3095,7 +3095,7 @@
         ]
       }
     },
-    "/api/v1/ExtEODReport": {
+    "/api/v1/c2b/ExtEODReport": {
       "post": {
         "tags": [
           "Live-data storage controller"
