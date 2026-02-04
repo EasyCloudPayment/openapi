@@ -116,6 +116,12 @@
                 "FAILED"
               ]
             }
+          },
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
           }
         ],
         "responses": {
@@ -195,7 +201,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_accounts"
+        "operationId": "post_api_v1_accounts",
+        "parameters": []
       }
     },
     "/api/v1/credit-rating": {
@@ -243,7 +250,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_credit-rating"
+        "operationId": "post_api_v1_credit-rating",
+        "parameters": []
       }
     },
     "/api/v1/credit-rating/{operationId}": {
@@ -399,7 +407,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_notifications_enable"
+        "operationId": "post_api_v1_notifications_enable",
+        "parameters": []
       }
     },
     "/api/v1/notifications/disable": {
@@ -447,7 +456,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_notifications_disable"
+        "operationId": "post_api_v1_notifications_disable",
+        "parameters": []
       }
     },
     "/api/v1/notifications/settings": {
@@ -541,7 +551,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_credit_offers"
+        "operationId": "post_api_v1_credit_offers",
+        "parameters": []
       }
     },
     "/api/v1/credit/offers/{operationId}": {
@@ -638,7 +649,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_credit_open"
+        "operationId": "post_api_v1_credit_open",
+        "parameters": []
       }
     },
     "/api/v1/deposit/offers": {
@@ -686,7 +698,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_deposit_offers"
+        "operationId": "post_api_v1_deposit_offers",
+        "parameters": []
       }
     },
     "/api/v1/deposit/offers/{operationId}": {
@@ -783,7 +796,8 @@
             "ApiKeyAuth": []
           }
         ],
-        "operationId": "post_api_v1_deposit_open"
+        "operationId": "post_api_v1_deposit_open",
+        "parameters": []
       }
     },
     "/api/v1/adjustment": {
@@ -1005,7 +1019,8 @@
             "description": "Internal server error"
           }
         },
-        "operationId": "post_api_v1_permission_issue"
+        "operationId": "post_api_v1_permission_issue",
+        "parameters": []
       }
     },
     "/api/v1/permission/recall/{permissionId}": {
@@ -1194,7 +1209,8 @@
             "description": "Forbidden"
           }
         },
-        "operationId": "post_api_v1_permission_request"
+        "operationId": "post_api_v1_permission_request",
+        "parameters": []
       }
     },
     "/api/v1/fraud": {
@@ -1585,6 +1601,12 @@
           },
           {
             "$ref": "#/components/parameters/switchType"
+          },
+          {
+            "$ref": "#/components/parameters/switchId"
+          },
+          {
+            "$ref": "#/components/parameters/switchType"
           }
         ],
         "responses": {
@@ -1624,29 +1646,21 @@
     "parameters": {
       "switchId": {
         "name": "switchId",
-        "in": "query",
+        "in": "header",
         "required": true,
-        "description": "Switch identifier",
         "schema": {
-          "type": "string",
-          "format": "uuid",
-          "minLength": 36,
-          "maxLength": 36
+          "type": "string"
         },
-        "example": "77a1880d-b359-4d1f-809d-9d2066044537"
+        "description": "Switch identifier"
       },
       "switchType": {
         "name": "switchType",
-        "in": "query",
+        "in": "header",
         "required": true,
-        "description": "Switch account type",
         "schema": {
-          "type": "string",
-          "format": "uuid",
-          "minLength": 36,
-          "maxLength": 36
+          "type": "string"
         },
-        "example": "PHONE"
+        "description": "Switch identifier type"
       },
       "amount": {
         "name": "amount",
