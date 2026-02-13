@@ -502,7 +502,7 @@
     },
     "/api/v1/credit/offers": {
       "post": {
-        "summary": "Request to create an operation to obtain a credit offers.",
+        "summary": "Request to create an operation to obtain credit offers.",
         "tags": [
           "Customer credits"
         ],
@@ -649,7 +649,7 @@
     },
     "/api/v1/deposit/offers": {
       "post": {
-        "summary": "Request to create an operation to obtain a deposit offers.",
+        "summary": "Request to create an operation to obtain deposit offers.",
         "tags": [
           "Customer deposits"
         ],
@@ -1390,7 +1390,7 @@
         "operationId": "post_api_v1_chargeback"
       }
     },
-    "/api/v1/representatment": {
+    "/api/v1/representment": {
       "post": {
         "tags": [
           "Disputes management API"
