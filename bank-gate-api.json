@@ -14,36 +14,13 @@
         "operationId": "customerCreditTransferRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -58,201 +35,29 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerCreditTransferResponse"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -267,40 +72,17 @@
         "tags": [
           "Identity Verification"
         ],
-        "summary": "[p2p-04-01] Request Identity verification",
+        "summary": "[p2p-04-02] Request identity verification to creditor agent",
         "operationId": "identityVerificationRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -322,178 +104,26 @@
                 "required": true,
                 "style": "simple",
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uuid"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -508,40 +138,17 @@
         "tags": [
           "Identity Verification"
         ],
-        "summary": "Fetch identity verification result",
+        "summary": "[p2p-04-03] Request with Identity verification reply",
         "operationId": "identityVerificationResult",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -559,198 +166,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -769,20 +197,7 @@
         "operationId": "getDefaultBank",
         "parameters": [
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -799,7 +214,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchForDefaultBankResponse"
                 }
@@ -807,198 +222,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -1017,20 +253,7 @@
         "operationId": "initializeDefaultBank",
         "parameters": [
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -1047,7 +270,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InitializeDefaultBankResponse"
                 }
@@ -1055,198 +278,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -1265,20 +309,7 @@
         "operationId": "confirmDefaultBank",
         "parameters": [
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -1295,7 +326,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiConfirmDefaultBankResponse"
                 }
@@ -1303,198 +334,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -1525,198 +377,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -1822,7 +495,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -1833,15 +506,10 @@
           "Envelope endpoint"
         ],
         "summary": "Send envelope",
-        "operationId": "submit_1",
+        "operationId": "submitEnvelope",
         "parameters": [
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -1858,7 +526,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EnvelopeResponseObject"
                 }
@@ -1866,198 +534,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -2072,40 +561,17 @@
         "tags": [
           "Request Customer To Business Credit Transfer"
         ],
-        "summary": "[c2b-01-01] Perform customer to business credit transfer request",
+        "summary": "[c2b-01-01] Customer-to-business payment request",
         "operationId": "customerToBusinessCreditTransferRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -2123,198 +589,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -2333,36 +620,13 @@
         "operationId": "customerToBusinessCreditTransferReply",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -2380,198 +644,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -2590,36 +675,13 @@
         "operationId": "liveDataStorageSingleRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -2637,198 +699,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -2847,36 +730,13 @@
         "operationId": "liveDataStorageBatchRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -2894,198 +754,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -3104,36 +785,13 @@
         "operationId": "liveDataDayReportRequest",
         "parameters": [
           {
-            "name": "X-Signature",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMessageId"
           },
           {
-            "name": "X-Message-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XCorrelationId"
           },
           {
-            "name": "X-Correlation-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "requestBody": {
@@ -3151,198 +809,19 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -3358,31 +837,20 @@
           "Participants"
         ],
         "summary": "Get participants list",
-        "operationId": "getList",
+        "operationId": "getParticipantsList",
         "parameters": [
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           },
           {
-            "name": "flow_types",
-            "in": "query",
-            "description": "Filter parameter for flow types. Contains comma separated flow types.",
-            "schema": {
-              "type": "string"
-            },
-            "example": "P2P,C2B,EXT"
+            "$ref": "#/components/parameters/FlowTypes"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ParticipantsListResponse"
                 }
@@ -3390,198 +858,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -3597,38 +886,23 @@
           "P2P Payment Status"
         ],
         "summary": "[p2p-06-01] Get payment status",
-        "operationId": "getPaymentStatus",
+        "operationId": "getP2pPaymentStatus",
         "parameters": [
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/P2pOperationId"
           },
           {
-            "name": "agentId",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/AgentId"
           },
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetP2pOperationResponse"
                 }
@@ -3636,198 +910,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -3843,40 +938,23 @@
           "C2B Payment Status"
         ],
         "summary": "[c2b-02-01] Get payment status",
-        "operationId": "getPaymentStatus_1",
+        "operationId": "getC2bPaymentStatus",
         "parameters": [
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "e551855b-443f-4dcc-b010-fe4c093031af"
-            },
-            "example": "e551855b-443f-4dcc-b010-fe4c093031af"
+            "$ref": "#/components/parameters/C2bOperationId"
           },
           {
-            "name": "agentId",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/AgentId"
           },
           {
-            "name": "X-Member-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/XMemberId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetC2bOperationResponse"
                 }
@@ -3884,198 +962,19 @@
             }
           },
           "400": {
-            "description": "Bad request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Authentication error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/AuthenticationError"
           },
           "403": {
-            "description": "Signature error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/SignatureError"
           },
           "409": {
-            "description": "Conflict.",
-            "headers": {
-              "X-Operation-Id": {
-                "description": "Operation id assigned by Switch",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
-            "description": "Internal error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "errorCodeMessage": {
-                      "type": "string",
-                      "enum": [
-                        "error.internal",
-                        "error.global.not_found",
-                        "error.global.forbidden",
-                        "error.global.bad_request",
-                        "error.global.unauthorized",
-                        "error.global.bad_argument",
-                        "error.rest-gateway.duplicate"
-                      ]
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalError"
           }
         },
         "security": [
@@ -4088,17 +987,6 @@
   },
   "components": {
     "schemas": {
-      "Account": {
-        "required": [
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "number": {
-            "type": "string"
-          }
-        }
-      },
       "Agent": {
         "required": [
           "agentId",
@@ -4112,42 +1000,66 @@
           "location": {
             "type": "string"
           }
+        },
+        "example": {
+          "agentId": "UG001",
+          "location": "Kampala, Uganda"
         }
       },
       "CustomerCreditTransferRequest": {
         "required": [
-          "creditor",
-          "creditorAgent",
-          "debtor",
-          "debtorAgent",
           "operationId",
           "paymentData",
-          "requestTime"
+          "debtor",
+          "creditor"
         ],
         "type": "object",
         "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "requestTime": {
             "type": "string",
-            "format": "date-time",
-            "example": "2024-10-03T19:50:21.926357929Z"
-          },
-          "operationId": {
-            "type": "string"
-          },
-          "debtor": {
-            "$ref": "#/components/schemas/UserFull"
-          },
-          "debtorAgent": {
-            "$ref": "#/components/schemas/Agent"
-          },
-          "creditor": {
-            "$ref": "#/components/schemas/UserFull"
-          },
-          "creditorAgent": {
-            "$ref": "#/components/schemas/Agent"
+            "format": "date-time"
           },
           "paymentData": {
-            "$ref": "#/components/schemas/PaymentDataFullDto"
+            "$ref": "#/components/schemas/P2pPaymentData"
+          },
+          "debtor": {
+            "$ref": "#/components/schemas/P2pCreditTransferParty"
+          },
+          "creditor": {
+            "$ref": "#/components/schemas/P2pCreditTransferCreditor"
+          }
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440001",
+          "requestTime": "2026-05-06T18:30:00Z",
+          "paymentData": {
+            "amount": 25000.0,
+            "currency": "UGX",
+            "purpose": "Family support transfer"
+          },
+          "debtor": {
+            "name": "John Okello",
+            "agentId": "UG001",
+            "account": "256700123456",
+            "tin": "1000123456",
+            "switchId": {
+              "number": "+256700123456",
+              "type": "PHONE"
+            }
+          },
+          "creditor": {
+            "name": "Sarah Namutebi",
+            "agentId": "UG002",
+            "account": "256780654321",
+            "tin": "1000654321",
+            "switchId": {
+              "number": "+256780654321",
+              "type": "PHONE"
+            }
           }
         }
       },
@@ -4198,6 +1110,11 @@
           "purpose": {
             "type": "string"
           }
+        },
+        "example": {
+          "amount": 25000.0,
+          "currency": "UGX",
+          "purpose": "Payment in Uganda"
         }
       },
       "SwitchId": {
@@ -4217,79 +1134,84 @@
           }
         }
       },
-      "UserFull": {
-        "required": [
-          "account",
-          "firstName",
-          "identification",
-          "lastName",
-          "postalAddress"
-        ],
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "Smith"
-          },
-          "middleName": {
-            "type": "string"
-          },
-          "postalAddress": {
-            "type": "string",
-            "example": "19720, Delaware, New Castle, 1 Cherry St"
-          },
-          "identification": {
-            "$ref": "#/components/schemas/IdentificationFull"
-          },
-          "account": {
-            "$ref": "#/components/schemas/Account"
-          }
-        }
-      },
       "IdentityVerificationRequest": {
-        "required": [
-          "creditor",
-          "creditorAgent",
-          "debtor",
-          "debtorAgent",
-          "paymentData",
-          "requestTime"
-        ],
         "type": "object",
+        "required": [
+          "operationId",
+          "debtor",
+          "creditor"
+        ],
         "properties": {
           "requestTime": {
             "type": "string",
             "format": "date-time"
           },
-          "paymentData": {
-            "$ref": "#/components/schemas/OperationPaymentData"
+          "operationId": {
+            "type": "string",
+            "format": "uuid"
           },
           "debtor": {
-            "$ref": "#/components/schemas/UserFull"
-          },
-          "debtorAgent": {
-            "$ref": "#/components/schemas/Agent"
+            "type": "object",
+            "required": [
+              "name",
+              "tin"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "tin": {
+                "type": "string"
+              },
+              "agentId": {
+                "type": "string"
+              },
+              "account": {
+                "type": "string"
+              }
+            }
           },
           "creditor": {
-            "$ref": "#/components/schemas/UserIdentifier"
-          },
-          "creditorAgent": {
-            "$ref": "#/components/schemas/Agent"
+            "type": "object",
+            "required": [
+              "agentId"
+            ],
+            "properties": {
+              "agentId": {
+                "type": "string"
+              },
+              "switchId": {
+                "type": "object",
+                "required": [
+                  "number"
+                ],
+                "properties": {
+                  "number": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        }
-      },
-      "OperationPaymentData": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number"
+        },
+        "example": {
+          "requestTime": "2026-05-06T18:30:00Z",
+          "operationId": "550e8400-e29b-41d4-a716-446655440002",
+          "debtor": {
+            "name": "John Okello",
+            "tin": "1000123456",
+            "agentId": "UG001",
+            "account": "256700123456"
           },
-          "currency": {
-            "type": "string"
+          "creditor": {
+            "agentId": "UG002",
+            "switchId": {
+              "number": "+256780654321",
+              "type": "PHONE"
+            }
           }
         }
       },
@@ -4348,27 +1270,48 @@
       "IdentityVerificationResult": {
         "required": [
           "operationId",
-          "reasonCode",
-          "requestTime"
+          "debtor",
+          "creditor"
         ],
         "type": "object",
         "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "requestTime": {
             "type": "string",
-            "format": "date-time",
-            "example": "2024-10-03T19:50:21.926357929Z"
-          },
-          "operationId": {
-            "type": "string"
+            "format": "date-time"
           },
           "reasonCode": {
             "type": "string"
           },
-          "creditor": {
-            "$ref": "#/components/schemas/UserFull"
+          "debtor": {
+            "$ref": "#/components/schemas/P2pIdentityVerificationDebtor"
           },
-          "creditorAgent": {
-            "$ref": "#/components/schemas/Agent"
+          "creditor": {
+            "$ref": "#/components/schemas/P2pIdentityVerificationCreditor"
+          }
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "requestTime": "2026-05-06T18:31:00Z",
+          "reasonCode": "MATCH",
+          "debtor": {
+            "name": "John Okello",
+            "tin": "1000123456",
+            "agentId": "UG001",
+            "account": "256700123456"
+          },
+          "creditor": {
+            "agentId": "UG002",
+            "name": "Sarah Namutebi",
+            "account": "256780654321",
+            "tin": "1000654321",
+            "switchId": {
+              "number": "+256780654321",
+              "type": "PHONE"
+            }
           }
         }
       },
@@ -4395,6 +1338,29 @@
           "debtorAgent": {
             "$ref": "#/components/schemas/Agent"
           }
+        },
+        "example": {
+          "requestTime": "2026-05-06T18:33:00Z",
+          "debtor": {
+            "identification": {
+              "switchId": {
+                "number": "+256700123456",
+                "type": "PHONE"
+              }
+            }
+          },
+          "creditor": {
+            "identification": {
+              "switchId": {
+                "number": "+256780654321",
+                "type": "PHONE"
+              }
+            }
+          },
+          "debtorAgent": {
+            "agentId": "UG001",
+            "location": "Kampala, Uganda"
+          }
         }
       },
       "SearchForDefaultBankResponse": {
@@ -4410,8 +1376,8 @@
       },
       "InitializeDefaultBankRequest": {
         "required": [
-          "Creditor agent",
-          "User identifier",
+          "creditorAgent",
+          "userIdentifier",
           "requestTime"
         ],
         "type": "object",
@@ -4421,11 +1387,26 @@
             "format": "date-time",
             "example": "2024-10-03T19:50:21.926357929Z"
           },
-          "User identifier": {
+          "userIdentifier": {
             "$ref": "#/components/schemas/UserIdentifier"
           },
-          "Creditor agent": {
+          "creditorAgent": {
             "$ref": "#/components/schemas/Agent"
+          }
+        },
+        "example": {
+          "requestTime": "2026-05-06T18:34:00Z",
+          "userIdentifier": {
+            "identification": {
+              "switchId": {
+                "number": "+256700123456",
+                "type": "PHONE"
+              }
+            }
+          },
+          "creditorAgent": {
+            "agentId": "UG002",
+            "location": "Entebbe, Uganda"
           }
         }
       },
@@ -4440,7 +1421,8 @@
             "type": "string"
           },
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -4462,7 +1444,8 @@
             "$ref": "#/components/schemas/Agent"
           },
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "otp": {
             "maximum": 999999,
@@ -4470,6 +1453,15 @@
             "type": "integer",
             "format": "int32"
           }
+        },
+        "example": {
+          "requestTime": "2026-05-06T18:35:00Z",
+          "creditorAgent": {
+            "agentId": "UG002",
+            "location": "Entebbe, Uganda"
+          },
+          "operationId": "550e8400-e29b-41d4-a716-446655440005",
+          "otp": 123456
         }
       },
       "ApiConfirmDefaultBankResponse": {
@@ -4525,7 +1517,8 @@
           },
           "operationId": {
             "type": "string",
-            "example": "6d618809-c434-42e3-b4de-6afc911dd647"
+            "example": "6d618809-c434-42e3-b4de-6afc911dd647",
+            "format": "uuid"
           },
           "signature": {
             "type": "string"
@@ -4534,6 +1527,18 @@
             "type": "string",
             "format": "byte"
           }
+        },
+        "example": {
+          "requestTime": "2026-05-06T18:36:00Z",
+          "messageId": "msg-20260506-0001",
+          "correlationId": "550e8400-e29b-41d4-a716-446655440006",
+          "sender": "memberUG1",
+          "receiver": "memberUG2",
+          "flowType": "P2P",
+          "messageType": "payment",
+          "operationId": "550e8400-e29b-41d4-a716-446655440007",
+          "signature": "base64-signature",
+          "message": "eyJjdXJyZW5jeSI6IlVHWCJ9"
         }
       },
       "EnvelopeResponseObject": {
@@ -4557,7 +1562,8 @@
             "type": "string"
           },
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "responseTime": {
             "type": "string",
@@ -4566,40 +1572,193 @@
         }
       },
       "C2bCreditTransferRequest": {
-        "required": [
-          "creditor",
-          "creditorAgent",
-          "debtor",
-          "debtorAgent",
-          "paymentData"
-        ],
         "type": "object",
+        "required": [
+          "metadata",
+          "paymentData",
+          "debtor",
+          "creditor"
+        ],
         "properties": {
+          "metadata": {
+            "type": "object",
+            "required": [
+              "destinationAgentId",
+              "senderAgentId",
+              "flowType",
+              "messageType",
+              "operationId",
+              "requestReceivedDate"
+            ],
+            "properties": {
+              "destinationAgentId": {
+                "type": "string",
+                "description": "Constant S00000000000."
+              },
+              "senderAgentId": {
+                "type": "string",
+                "description": "Value from the X-Member-Id header."
+              },
+              "flowType": {
+                "type": "string",
+                "description": "Constant c2b."
+              },
+              "messageType": {
+                "type": "string",
+                "description": "Constant c2b-01-1."
+              },
+              "operationId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Generated operationId."
+              },
+              "requestReceivedDate": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Date and time when Bank Gate received the request."
+              }
+            }
+          },
           "paymentData": {
-            "$ref": "#/components/schemas/PaymentDataFullDto"
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "number"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              }
+            }
           },
           "debtor": {
-            "$ref": "#/components/schemas/UserFull"
-          },
-          "debtorAgent": {
-            "$ref": "#/components/schemas/Agent"
+            "type": "object",
+            "required": [
+              "name",
+              "tin",
+              "account",
+              "identification"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "tin": {
+                "type": "string"
+              },
+              "agentId": {
+                "type": "string"
+              },
+              "account": {
+                "type": "string"
+              },
+              "identification": {
+                "type": "object",
+                "required": [
+                  "switchId"
+                ],
+                "properties": {
+                  "switchId": {
+                    "type": "object",
+                    "required": [
+                      "number",
+                      "type"
+                    ],
+                    "properties": {
+                      "number": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "creditor": {
-            "$ref": "#/components/schemas/MerchantPayment"
-          },
-          "creditorAgent": {
-            "$ref": "#/components/schemas/Agent"
+            "type": "object",
+            "required": [
+              "paymentLinkId",
+              "legalId",
+              "tin",
+              "merchantId",
+              "merchantName",
+              "account",
+              "mcc",
+              "agentId"
+            ],
+            "properties": {
+              "paymentLinkId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "legalId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "tin": {
+                "type": "string"
+              },
+              "merchantId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "merchantName": {
+                "type": "string"
+              },
+              "account": {
+                "type": "string"
+              },
+              "mcc": {
+                "type": "string"
+              },
+              "locationCode": {
+                "type": "string"
+              },
+              "agentId": {
+                "type": "string"
+              }
+            }
           }
-        }
-      },
-      "MerchantPayment": {
-        "required": [
-          "paymentLinkId"
-        ],
-        "type": "object",
-        "properties": {
-          "paymentLinkId": {
-            "type": "string"
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440004",
+          "requestTime": "2026-05-06T18:32:00Z",
+          "paymentData": {
+            "amount": 150000.0,
+            "currency": "UGX",
+            "purpose": "Payment for groceries"
+          },
+          "debtor": {
+            "name": "Grace Achieng",
+            "tin": "1000222333",
+            "agentId": "UG001",
+            "account": "256701222333",
+            "identification": {
+              "switchId": {
+                "number": "+256701222333",
+                "type": "PHONE"
+              }
+            }
+          },
+          "creditor": {
+            "paymentLinkId": "550e8400-e29b-41d4-a716-446655440104",
+            "legalId": "550e8400-e29b-41d4-a716-446655440204",
+            "tin": "1000444555",
+            "merchantId": "550e8400-e29b-41d4-a716-446655440304",
+            "merchantName": "Kampala Central Market Store",
+            "account": "UGX1234567890",
+            "mcc": "5411",
+            "locationCode": "KLA-CENTRAL",
+            "agentId": "UG010"
           }
         }
       },
@@ -4612,7 +1771,8 @@
         "type": "object",
         "properties": {
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "reason": {
             "$ref": "#/components/schemas/ReasonDto"
@@ -4797,7 +1957,8 @@
             "format": "date-time"
           },
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "messageId": {
             "type": "string"
@@ -5058,6 +2219,10 @@
           "location": {
             "type": "string"
           }
+        },
+        "example": {
+          "agentId": "UG001",
+          "location": "Kampala, Uganda"
         }
       },
       "GetP2pOperationResponse": {
@@ -5073,7 +2238,8 @@
         "type": "object",
         "properties": {
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "paymentData": {
             "$ref": "#/components/schemas/PaymentDataFullDto"
@@ -5101,6 +2267,40 @@
           "finalReasonCode": {
             "type": "string"
           }
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440008",
+          "paymentData": {
+            "amount": 25000.0,
+            "currency": "UGX",
+            "purpose": "Family support transfer"
+          },
+          "debtor": {
+            "identification": {
+              "switchId": {
+                "number": "+256700123456",
+                "type": "PHONE"
+              }
+            }
+          },
+          "creditor": {
+            "identification": {
+              "switchId": {
+                "number": "+256780654321",
+                "type": "PHONE"
+              }
+            }
+          },
+          "debtorAgent": {
+            "agentId": "UG001",
+            "location": "Kampala, Uganda"
+          },
+          "creditorAgent": {
+            "agentId": "UG002",
+            "location": "Entebbe, Uganda"
+          },
+          "status": "ACCEPTED",
+          "finalReasonCode": "ACCEPTED"
         }
       },
       "UserIdentifierDto": {
@@ -5138,7 +2338,8 @@
         "type": "object",
         "properties": {
           "operationId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "paymentData": {
             "$ref": "#/components/schemas/PaymentDataFullDto"
@@ -5166,6 +2367,39 @@
           "finalReasonCode": {
             "type": "string"
           }
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440009",
+          "paymentData": {
+            "amount": 150000.0,
+            "currency": "UGX",
+            "purpose": "Payment for groceries"
+          },
+          "debtor": {
+            "name": "Grace Achieng",
+            "tin": "1000222333",
+            "agentId": "UG001",
+            "account": "256701222333",
+            "identification": {
+              "switchId": {
+                "number": "+256701222333",
+                "type": "PHONE"
+              }
+            }
+          },
+          "creditor": {
+            "paymentLinkId": "550e8400-e29b-41d4-a716-446655440104",
+            "legalId": "550e8400-e29b-41d4-a716-446655440204",
+            "tin": "1000444555",
+            "merchantId": "550e8400-e29b-41d4-a716-446655440304",
+            "merchantName": "Kampala Central Market Store",
+            "account": "UGX1234567890",
+            "mcc": "5411",
+            "locationCode": "KLA-CENTRAL",
+            "agentId": "UG010"
+          },
+          "status": "ACCEPTED",
+          "finalReasonCode": "ACCEPTED"
         }
       },
       "MerchantFullDto": {
@@ -5259,7 +2493,7 @@
             "example": "000000"
           },
           "amount": {
-            "type": "string",
+            "type": "number",
             "description": "amount",
             "example": "000000010000"
           },
@@ -5536,7 +2770,7 @@
             "example": "000000"
           },
           "amount": {
-            "type": "string",
+            "type": "number",
             "description": "amount",
             "example": "000000010000"
           },
@@ -5756,6 +2990,168 @@
             "example": "IADAUTHDATA"
           }
         }
+      },
+      "P2pSwitchId": {
+        "required": [
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "P2pIdentityVerificationDebtor": {
+        "required": [
+          "name",
+          "tin"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          }
+        }
+      },
+      "P2pIdentityVerificationCreditor": {
+        "required": [
+          "agentId"
+        ],
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "switchId": {
+            "$ref": "#/components/schemas/P2pSwitchId"
+          }
+        }
+      },
+      "P2pPaymentData": {
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          }
+        }
+      },
+      "P2pCreditTransferParty": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "switchId": {
+            "$ref": "#/components/schemas/P2pSwitchId"
+          }
+        }
+      },
+      "P2pCreditTransferCreditor": {
+        "required": [
+          "name",
+          "switchId"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "tin": {
+            "type": "string"
+          },
+          "switchId": {
+            "$ref": "#/components/schemas/P2pSwitchId"
+          }
+        }
+      },
+      "P2pCreditTransferReason": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "additionalInfo": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomerCreditTransferResponse": {
+        "required": [
+          "operationId",
+          "reason",
+          "operationStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/P2pCreditTransferReason"
+          },
+          "operationStatus": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440001",
+          "reason": {
+            "code": "ACCEPTED",
+            "additionalInfo": "Payment request accepted for processing"
+          },
+          "operationStatus": "ACCEPTED"
+        }
       }
     },
     "securitySchemes": {
@@ -5763,6 +3159,135 @@
         "type": "apiKey",
         "in": "header",
         "name": "X-Signature"
+      }
+    },
+    "parameters": {
+      "XMessageId": {
+        "name": "X-Message-Id",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Unique message identifier."
+      },
+      "XCorrelationId": {
+        "name": "X-Correlation-Id",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "End-to-end business process identifier. Currently the operationId."
+      },
+      "XMemberId": {
+        "name": "X-Member-Id",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Set by nginx."
+      },
+      "AgentId": {
+        "name": "agentId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Participant agent identifier."
+      },
+      "P2pOperationId": {
+        "name": "operationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Operation identifier."
+      },
+      "C2bOperationId": {
+        "name": "operationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Operation identifier."
+      },
+      "FlowTypes": {
+        "name": "flowTypes",
+        "in": "query",
+        "description": "Filter parameter for flow types. Contains comma-separated flow types.",
+        "schema": {
+          "type": "string"
+        },
+        "example": "P2P,C2B,EXT"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "AuthenticationError": {
+        "description": "Authentication error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "SignatureError": {
+        "description": "Signature error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Conflict.",
+        "headers": {
+          "X-Operation-Id": {
+            "description": "Operation id assigned by Switch",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Internal error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
