@@ -4505,7 +4505,6 @@
         "required": [
           "creditor",
           "debtor",
-          "operationId",
           "requestTime"
         ],
         "example": {
