@@ -1487,14 +1487,21 @@
         ],
         "operationId": "submit",
         "requestBody": {
+          "required": true,
           "content": {
             "application/xml": {
               "schema": {
-                "type": "string"
+                "type": "string",
+                "format": "binary"
+              },
+              "examples": {
+                "pacs008": {
+                  "summary": "ISO20022 pacs.008 example",
+                  "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08\">\n  <FIToFICstmrCdtTrf>\n    <GrpHdr>\n      <MsgId>MSG-001</MsgId>\n    </GrpHdr>\n  </FIToFICstmrCdtTrf>\n</Document>"
+                }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
