@@ -4,6 +4,12 @@
     "title": "Public API - Bank Gate",
     "version": "v1"
   },
+  "tags": [
+    {
+      "name": "Rtp: P2P Request To Pay",
+      "description": "Request to pay: the Creditor initiates a transfer request addressed to the Debtor."
+    }
+  ],
   "paths": {
     "/public-api/v1/p2p/payment": {
       "post": {
@@ -62,7 +68,7 @@
                   "tin": "3004005006",
                   "switchId": {
                     "number": "256701112223",
-                    "type": "MSISDN"
+                    "type": "PHONE"
                   }
                 },
                 "creditor": {
@@ -72,7 +78,7 @@
                   "tin": "4005006007",
                   "switchId": {
                     "number": "256784556677",
-                    "type": "MSISDN"
+                    "type": "PHONE"
                   }
                 },
                 "paymentData": {
@@ -115,6 +121,658 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Signature error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-api/v1/p2p/rtp/request": {
+      "post": {
+        "tags": [
+          "Rtp: P2P Request To Pay"
+        ],
+        "summary": "P2P RTP: [rtp-p2p-1] Request to pay",
+        "operationId": "p2pRtpRequest",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Message-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RtpRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "X-Operation-Id": {
+                "description": "Operation id assigned by Switch",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict.",
+            "headers": {
+              "X-Operation-Id": {
+                "description": "Operation id assigned by Switch",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Signature error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "rtpBusinessStatus": {
+            "{$memberEndpoint}/rtp-business-status": {
+              "post": {
+                "summary": "P2P RTP: [rtp-p2p-2] Business status → Банк Получателя",
+                "operationId": "rtpBusinessStatusCallback",
+                "parameters": [
+                  {
+                    "name": "X-Signature",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Message-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Correlation-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Member-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/RtpBusinessStatus"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+            }
+          },
+          "rtpNotification": {
+            "{$memberEndpoint}/rtp-notification": {
+              "post": {
+                "summary": "P2P RTP: [rtp-p2p-3] Notification → Банк Плательщика",
+                "operationId": "rtpNotificationCallback",
+                "parameters": [
+                  {
+                    "name": "X-Signature",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Message-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Correlation-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Member-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/RtpNotification"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+            }
+          },
+          "rtpFinalStatus": {
+            "{$memberEndpoint}/api/v1/p2p/operation-status-reply": {
+              "post": {
+                "summary": "P2P RTP: [rtp-p2p-6] Payment status notification → оба банка",
+                "operationId": "rtpFinalStatusCallback",
+                "parameters": [
+                  {
+                    "name": "X-Signature",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Message-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Correlation-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Member-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/RtpFinalStatus"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-api/v1/p2p/rtp/accept-result": {
+      "post": {
+        "tags": [
+          "Rtp: P2P Request To Pay"
+        ],
+        "summary": "P2P RTP: [rtp-p2p-4] Accept result",
+        "operationId": "p2pRtpAcceptResult",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Message-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Member-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RtpAcceptResult"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict.",
+            "headers": {
+              "X-Operation-Id": {
+                "description": "Operation id assigned by Switch",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "errorCodeMessage": {
+                      "type": "string",
+                      "enum": [
+                        "error.internal",
+                        "error.global.not_found",
+                        "error.global.forbidden",
+                        "error.global.bad_request",
+                        "error.global.unauthorized",
+                        "error.global.bad_argument",
+                        "error.rest-gateway.duplicate"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -323,14 +981,14 @@
                   "tin": "2003004005",
                   "switchId": {
                     "number": "256772998877",
-                    "type": "MSISDN"
+                    "type": "PHONE"
                   }
                 },
                 "creditor": {
                   "agentId": "UGBANK003",
                   "switchId": {
                     "number": "256703445566",
-                    "type": "MSISDN"
+                    "type": "PHONE"
                   }
                 }
               }
@@ -4822,7 +5480,7 @@
             "tin": "3004005006",
             "switchId": {
               "number": "256701112223",
-              "type": "MSISDN"
+              "type": "PHONE"
             }
           },
           "creditor": {
@@ -4832,7 +5490,7 @@
             "tin": "4005006007",
             "switchId": {
               "number": "256784556677",
-              "type": "MSISDN"
+              "type": "PHONE"
             }
           },
           "paymentData": {
@@ -4879,7 +5537,7 @@
         ],
         "example": {
           "number": "256701234567",
-          "type": "MSISDN"
+          "type": "PHONE"
         }
       },
       "UserFull": {
@@ -4918,7 +5576,7 @@
           "tin": "1002003004",
           "switchId": {
             "number": "256701234567",
-            "type": "MSISDN"
+            "type": "PHONE"
           }
         }
       },
@@ -4983,14 +5641,14 @@
             "tin": "2003004005",
             "switchId": {
               "number": "256772998877",
-              "type": "MSISDN"
+              "type": "PHONE"
             }
           },
           "creditor": {
             "agentId": "UGBANK003",
             "switchId": {
               "number": "256703445566",
-              "type": "MSISDN"
+              "type": "PHONE"
             }
           }
         }
@@ -6219,6 +6877,192 @@
             "reachable": true
           }
         }
+      },
+      "RtpDebtor": {
+        "type": "object",
+        "description": "Debtor alias. Debtor details and Debtor Agent are resolved by Switch.",
+        "properties": {
+          "switchId": {
+            "$ref": "#/components/schemas/SwitchId"
+          },
+          "identityDocument": {
+            "$ref": "#/components/schemas/IdentityDocument"
+          },
+          "agentId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Debtor Agent. Filled in by Switch after alias resolution."
+          }
+        },
+        "required": [
+          "switchId"
+        ],
+        "example": {
+          "switchId": {
+            "number": "256701112223",
+            "type": "PHONE"
+          }
+        }
+      },
+      "RtpRequest": {
+        "type": "object",
+        "properties": {
+          "requestTime": {
+            "type": "string",
+            "example": "2024-10-03T19:50:21.926357929Z"
+          },
+          "operationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "creditor": {
+            "$ref": "#/components/schemas/UserFull"
+          },
+          "debtor": {
+            "$ref": "#/components/schemas/RtpDebtor"
+          },
+          "paymentData": {
+            "$ref": "#/components/schemas/PaymentDataFullDto"
+          }
+        },
+        "required": [
+          "creditor",
+          "debtor",
+          "operationId",
+          "paymentData",
+          "requestTime"
+        ],
+        "example": {
+          "requestTime": "2026-05-14T10:20:00Z",
+          "operationId": "ug-rtp-0001",
+          "creditor": {
+            "name": "Achieng Grace",
+            "account": "440055006677",
+            "agentId": "UGBANK004",
+            "tin": "4005006007",
+            "switchId": {
+              "number": "256784556677",
+              "type": "PHONE"
+            }
+          },
+          "debtor": {
+            "switchId": {
+              "number": "256701112223",
+              "type": "PHONE"
+            }
+          },
+          "paymentData": {
+            "amount": 150000,
+            "currency": "UGX",
+            "purpose": "Family support Gulu"
+          }
+        }
+      },
+      "RtpAcceptResult": {
+        "type": "object",
+        "description": "Debtor decision. reason.code: S00000 - accepted, S00030 - rejected.",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "$ref": "#/components/schemas/ReasonDto"
+          },
+          "debtorAgent": {
+            "$ref": "#/components/schemas/Agent"
+          }
+        },
+        "required": [
+          "debtorAgent",
+          "operationId",
+          "reason"
+        ],
+        "example": {
+          "operationId": "e551855b-443f-4dcc-b010-fe4c093031af",
+          "reason": {
+            "code": "S00000"
+          },
+          "debtorAgent": {
+            "agentId": "UGBANK001",
+            "location": "Kampala"
+          }
+        }
+      },
+      "RtpBusinessStatus": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACCEPTED",
+              "RECEIVED",
+              "REJECTED"
+            ]
+          },
+          "reason": {
+            "$ref": "#/components/schemas/ReasonDto"
+          },
+          "debtorAgent": {
+            "$ref": "#/components/schemas/AgentDto"
+          }
+        },
+        "required": [
+          "operationId",
+          "status"
+        ]
+      },
+      "RtpNotification": {
+        "type": "object",
+        "properties": {
+          "requestTime": {
+            "type": "string",
+            "example": "2024-10-03T19:50:21.926357929Z"
+          },
+          "operationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "creditor": {
+            "$ref": "#/components/schemas/UserFull"
+          },
+          "creditorAgent": {
+            "$ref": "#/components/schemas/AgentDto"
+          },
+          "debtor": {
+            "$ref": "#/components/schemas/RtpDebtor"
+          },
+          "debtorAgent": {
+            "$ref": "#/components/schemas/AgentDto"
+          },
+          "paymentData": {
+            "$ref": "#/components/schemas/PaymentDataFullDto"
+          },
+          "expiryDateTime": {
+            "type": "string",
+            "description": "Debtor decision deadline",
+            "example": "2026-05-15T10:20:00Z"
+          }
+        },
+        "required": [
+          "creditor",
+          "debtor",
+          "operationId",
+          "paymentData",
+          "requestTime"
+        ]
+      },
+      "RtpFinalStatus": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetP2pOperationResponse"
+          }
+        ],
+        "description": "Final RTP operation status. Same schema shape as GetP2pOperationResponse."
       }
     }
   }
