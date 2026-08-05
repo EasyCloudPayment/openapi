@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "Rtp: P2P Request To Pay",
+      "name": "P2P: Request To Pay",
       "description": "Request to pay: the Creditor initiates a transfer request addressed to the Debtor."
     }
   ],
